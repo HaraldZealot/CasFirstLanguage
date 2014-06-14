@@ -1,0 +1,124 @@
+\documentclass[12pt]{article} 
+\usepackage[xetex, a4paper, left=2cm, right=2cm, top=2cm,bottom=2cm]{geometry}
+\usepackage[cm-default]{fontspec}
+\usepackage{xunicode}
+
+%\tolerance=1000
+%\emergencystretch=0.74cm 
+
+\usepackage{polyglossia}
+\setdefaultlanguage[spelling=modern]{russian}
+\setotherlanguage{english} 
+\defaultfontfeatures{Scale=MatchLowercase,Ligatures=TeX}  %% устанавливает поведение шрифтов по умолчанию  
+\newfontfamily\cyrillicfont{Linux Libertine} 
+\setromanfont[Mapping=tex-text]{Linux Libertine}
+\setsansfont[Mapping=tex-text]{Linux Biolinum}
+\setmonofont{Ubuntu Mono}
+%\newfontfamily\cyrillicfont{Liberation Mono} 
+
+%\usepackage{makecell}
+
+%\usepackage{titlesec}
+%\newcommand{\sectionbreak}{\clearpage}
+
+%\renewcommand{\thesection}{\Alph{section}}
+%\newcount\wd    \wd=\textwidth \multiply\wd by 8 \divide\wd by 17
+
+\usepackage{minted}
+\usemintedstyle{friendly}
+\renewcommand\listingscaption{Код}
+
+
+\usepackage[unicode, pdfborder={0 0 0 0}]{hyperref}
+
+\author{Alaksiej Stankievič}
+\title{Базовый модуль}
+
+\begin{document}
+\hypersetup{
+pdftitle = {Язык программирования С. Базовый модуль},
+pdfauthor = {Alaksiej Stankievič},
+pdfsubject = {базовый модуль}}% End of hypersetup
+
+\section{Ввод и вывод}
+Любая программа должна взаимодействовать с конечным пользователем (человеком или другой программой). Во многих языках программирования, особенно учебных, ввод и вывод заложен в сам синтаксис языка. Но на языке C это не так, потому что могут быть очень различные способы взаимодействия с пользователем (консольный, диалоговые окна и т.д.), поэтому ввод и вывод на языке это подключаемая и заменяемая функциональность. В стандартную библиотеку языка C входит стандартный модуль отвечающий за ввод и вывод, именно за его подключение отвечает строка \verb|#include <stdio.h>|, в языке C++ свой стандартный модуль ввода и вывода, но можно пользоваться и модулем языка C, также в оба языка можно подключать сторонние модули, например, \verb|curses|. Далее мы будем рассматривать только стандартный модуль языка C, а модуль языка C++ рассмотрим гораздо позднее, чтобы они не путались у вас в голове.
+
+В \verb|stdio| базовый ввод и вывод осуществляется функциями \verb|scanf| и \verb|printf|\footnote{Буква f означает, что эти функции осуществляют форматированный ввод и вывод. А сами название психологически полезно ассоциировать со сканером и принтером.} соответственно. Они имеют схожий синтаксис, представленный в псевдокоде \ref{lst:pseudoprintfscanf}, но у них есть и некоторые различия, которые рассмотрим чуть позже.
+
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("строка форматирования", произвольное, число, аргументов);
+scanf("строка форматирования", произвольное, число, аргументов);
+\end{minted}
+\end{center}
+\caption{Синтаксис scanf и printf}
+\label{lst:pseudoprintfscanf}
+\end{listing}
+
+
+Рассмотрим несколько примеров печати. Для начала напечатаем просто строку текста.
+
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("simple string for sample");
+\end{minted}
+\end{center}
+\caption{Простой вывод строки}
+\label{lst:simplestring}
+\end{listing}
+
+Мы видим, что если в качестве строки форматирования используются строка, то она печатается как есть. Строка может также содержать escape последовательности, как это сделано в следующем примере (см. код \ref{lst:morecomplicatedstring}), результат выполнения которого представлен в коде \ref{lst:resultmcs}.
+
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("This is\t\tmore\ncomplicated\tstring\n");
+\end{minted}
+\end{center}
+\caption{Более сложный пример со строкой}
+\label{lst:morecomplicatedstring}
+\end{listing}
+
+\begin{listing}[h]
+\begin{center}
+\begin{verbatim}
+This is         more
+complicated     string
+
+\end{verbatim}
+\end{center}
+\caption{Результат предыдущего кода}
+\label{lst:resultmcs}
+\end{listing}
+
+Каждая escape последовательность определяет опрделённое поведение консоли, с точки зрения языка программирования они представляют просто символ с определённым кодом, это уже программа консоль подчиняясь этому коду выполняет нужное действие, поэтому в зависимости от программы и настроек не все escape последовательности могут работать. Вот список escape последовательностей:
+\begin{itemize}
+ \item \verb|'\n'| Перенос строки. Следующий за этим символом текст печатается с новой строки (сначала). Благодаря этому код \ref{lst:morecomplicatedstring} печатается в три строки.
+ \item \verb|'\t'| Символ табуляции. Продолжает печать с ближайшей границы табуляции, не зависящей от строки, вне зависимости от того, сколько символов напечатано перед этим. Благодарю символу табуляции \verb|more| и \verb|string| расположены в одном и том же месте по горизонтали (см. код \ref{lst:resultmcs}), обратите внимание, что в первой строке использовано да символа табуляции.
+ \item \verb|'\b'| Удаляет предыдущей символ.
+ \item \verb|'\r'| Возврат каретки. Печать начинается сначала поверх уже напечатанной строки.
+ \item \verb|'\v'| Вертикальная табуляция. Печатаем на следующей строке, с того же места по горизонтали.
+ \item \verb|'\a'| Сигнал, обычно звуковой если есть.
+ \item \verb|'\"'| Символ двойной кавычки.
+ \item \verb|'\''| Символ одинарной кавычки.
+ \item \verb|'\?'| Символ вопроса (из-за существования так называемых триграфов).
+ \item \verb|'\\'| Символ обратной косой черты.
+\end{itemize}
+
+Однако строка форматирования обладает гораздо большей функциональностью. Помимо обычных символов и escape последовательностей строка форматирования может содержать спецификации форматирования. Любая спецификация состоит из символа \verb|%|, набора флагов и различных параметров формата (они могут отсутствовать) и ключевого символа-спецификации. Так, например, \verb|%s| предназначен для вывода строки\footnote{от \textit{string} --- строка}. В коде \ref{lst:percents} показан пример использования спецификации \verb|%s|.
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("%s myla %s", "mama", "ramu");
+\end{minted}
+\end{center}
+\caption{Простой пример спецификации}
+\label{lst:percents}
+\end{listing}
+
+Данный кусок кода печатает фразу \verb|mama myla ramu|. На место первого \verb|%s| стала строка \verb|"mama"|, а на место второго --- \verb|ramu|. В этом и есть принцип работы функции \verb|printf|: на место каждой спецификации формата будет подставлен аргумент (из тех, которые, после строки форматирования) в том же порядке. Поэтому количество спецификаций формата и количество аргументов должны полностью соответствовать друг другу\footnote{Если аргументов будет больше, то они не будут выведены, а если меньше, то они будут взяты откуда-то из оперативной памяти, что весьма небезопасно.}.
+
+
+\end{document}
