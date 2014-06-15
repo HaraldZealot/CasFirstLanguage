@@ -120,5 +120,34 @@ printf("%s myla %s", "mama", "ramu");
 
 Данный кусок кода печатает фразу \verb|mama myla ramu|. На место первого \verb|%s| стала строка \verb|"mama"|, а на место второго --- \verb|ramu|. В этом и есть принцип работы функции \verb|printf|: на место каждой спецификации формата будет подставлен аргумент (из тех, которые, после строки форматирования) в том же порядке. Поэтому количество спецификаций формата и количество аргументов должны полностью соответствовать друг другу\footnote{Если аргументов будет больше, то они не будут выведены, а если меньше, то они будут взяты откуда-то из оперативной памяти, что весьма небезопасно.}.
 
+Начнём усложнять наши примеры. Мы можем выводить не только строки, но и целые числа (см. код \ref{lst:percentd}).
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("min(%d, %d) = %d", 2, 5, 2);
+\end{minted}
+\end{center}
+\caption{Простой пример спецификации}
+\label{lst:percentd}
+\end{listing}
+В приведённом примере мы самостоятельно определили минимум, но можно поручить это компьютеру, так как в качестве аргументов могут быть выражения (код \ref{lst:printfexpression}) и переменные (код \ref{lst:printfvariable}).
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("%d + %d = %d", 2, 5, 2 + 5);
+\end{minted}
+\end{center}
+\caption{Простой пример спецификации}
+\label{lst:printfexpression}
+\end{listing}
+\begin{listing}[h]
+\begin{center}
+\begin{minted}{cpp}
+printf("%d - %d = %d", a, b, a - b);
+\end{minted}
+\end{center}
+\caption{Простой пример спецификации}
+\label{lst:printfvariable}
+\end{listing}
 
 \end{document}
