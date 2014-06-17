@@ -1,0 +1,80 @@
+\documentclass[12pt]{article} 
+\usepackage[xetex, a4paper, left=2cm, right=2cm, top=2cm,bottom=2cm]{geometry}
+\usepackage[cm-default]{fontspec}
+\usepackage{xunicode}
+
+%\tolerance=1000
+%\emergencystretch=0.74cm 
+
+\usepackage{polyglossia}
+\setdefaultlanguage[spelling=modern]{russian}
+\setotherlanguage{english} 
+\defaultfontfeatures{Scale=MatchLowercase,Ligatures=TeX}  %% устанавливает поведение шрифтов по умолчанию  
+\newfontfamily\cyrillicfont{Linux Libertine} 
+\setromanfont[Mapping=tex-text]{Linux Libertine}
+\setsansfont[Mapping=tex-text]{Linux Biolinum}
+\setmonofont{Ubuntu Mono}
+%\newfontfamily\cyrillicfont{Liberation Mono} 
+
+%\usepackage{makecell}
+
+%\usepackage{titlesec}
+%\newcommand{\sectionbreak}{\clearpage}
+
+%\renewcommand{\thesection}{\Alph{section}}
+%\newcount\wd    \wd=\textwidth \multiply\wd by 8 \divide\wd by 17
+
+\usepackage{minted}
+\usemintedstyle{friendly}
+\renewcommand\listingscaption{Код}
+
+
+\usepackage[unicode, pdfborder={0 0 0 0}]{hyperref}
+
+\author{Alaksiej Stankievič}
+\title{Базовый модуль}
+
+\begin{document}
+\hypersetup{
+pdftitle = {Язык программирования С. Базовый модуль},
+pdfauthor = {Alaksiej Stankievič},
+pdfsubject = {базовый модуль}}% End of hypersetup
+
+\section{Команды баша}
+Для смены папки используются команда \verb|cd| (код \ref{lst:cd}). Имя папки может либо быть полным (тогда оно начинается от корня \verb|/|), либо относительным ищется в данной папке. Есть два особых имени папок: \verb|.| текущая папка и \verb|..| папка на уровень выше, чем можно пользоваться (код \ref{lst:cdtwodot}). 
+\begin{listing}[ht]
+\begin{center}
+\begin{minted}{bash}
+cd <имя папки>
+\end{minted}
+\end{center}
+\caption{Смена директории}
+\label{lst:cd}
+\end{listing}
+
+\begin{listing}[ht]
+\begin{center}
+\begin{minted}{bash}
+cd ..
+\end{minted}
+\end{center}
+\caption{Подняться на директорию вверх}
+\label{lst:cdtwodot}
+\end{listing}
+
+\section{Команды гита}
+
+
+\begin{listing}[ht]
+\begin{center}
+\begin{minted}{bash}
+git init
+\end{minted}
+\end{center}
+\caption{Создание пустого репозитория}
+\label{lst:gitinit}
+\end{listing}
+
+
+
+\end{document}
