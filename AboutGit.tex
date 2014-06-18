@@ -26,6 +26,8 @@
 
 \usepackage{minted}
 \usemintedstyle{friendly}
+\newminted{bash}{frame=lines}
+\newminted{c}{frame=leftline}
 \renewcommand\listingscaption{Код}
 
 
@@ -36,40 +38,86 @@
 
 \begin{document}
 \hypersetup{
-pdftitle = {Язык программирования С. Базовый модуль},
+pdftitle = {Основные команды git},
 pdfauthor = {Alaksiej Stankievič},
 pdfsubject = {базовый модуль}}% End of hypersetup
 
-\section{Команды баша}
+\section{Команды bash}
 Для смены папки используются команда \verb|cd| (код \ref{lst:cd}). Имя папки может либо быть полным (тогда оно начинается от корня \verb|/|), либо относительным ищется в данной папке. Есть два особых имени папок: \verb|.| текущая папка и \verb|..| папка на уровень выше, чем можно пользоваться (код \ref{lst:cdtwodot}). 
-\begin{listing}[ht]
+\begin{listing}[H]
 \begin{center}
-\begin{minted}{bash}
+\begin{bashcode}
 cd <имя папки>
-\end{minted}
+\end{bashcode}
 \end{center}
 \caption{Смена директории}
 \label{lst:cd}
 \end{listing}
 
-\begin{listing}[ht]
+\begin{listing}[H]
 \begin{center}
-\begin{minted}{bash}
+\begin{bashcode}
 cd ..
-\end{minted}
+\end{bashcode}
 \end{center}
 \caption{Подняться на директорию вверх}
 \label{lst:cdtwodot}
 \end{listing}
 
-\section{Команды гита}
+Для просмотра содержимого используется команда \verb|ls|. Без опций она выводит просто содержимое текущей папки. У многих команд есть опция \verb|--help|, которая выдаёт справку по использованию данной команды. Часто распространённые опции можно сократить до одной буквы, например, \verb|-h| (внимание! в случае \verb|ls| это не справка, а человекочитаемый формат размера файла\footnote{полезна в сочетании с опцией -l}). Так у команды \verb|ls| есть опция \verb|-a| --- показ скрытых файлов, опция \verb|-l| --- выведение в виде списка с более подробной информацией и уже упомянутая опция \verb|-h|, их все можно сочетать так как показано в коде \ref{lst:lsalh}.
+
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+ls -alh
+\end{bashcode}
+\end{center}
+\caption{Показать содержимое текущей папки включая скрытые файлы в виде списка, размер файла выводить в человекочитаемом формате}
+\label{lst:lsalh}
+\end{listing}
+
+Для создания папки используется команда \verb|mkdir| (код \ref{lst:mkdir}).
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+mkdir <имя папки>
+\end{bashcode}
+\end{center}
+\caption{Создание папки}
+\label{lst:mkdir}
+\end{listing}
+
+Для копирования и перемещения(переименования) используются команды \verb|cp| и \verb|mv| соответственно с похожим синтаксисом (код \ref{lst:cpmv}).
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+cp <исходное имя> <итоговое имя>
+mv <исходное имя> <итоговое имя>
+\end{bashcode}
+\end{center}
+\caption{Копирование и перемещение}
+\label{lst:cpmv}
+\end{listing}
+
+Для удаления используется команда \verb|rm|. Если нужно удалить папку нужно употребить опции \verb|-r| и \verb|-f| (код \ref{lst:rmrf}).
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+rm -rf <имя папки>
+\end{bashcode}
+\end{center}
+\caption{Удаление папки}
+\label{lst:rmrf}
+\end{listing}
+
+\section{Команды git}
 
 
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{bash}
+\begin{bashcode}
 git init
-\end{minted}
+\end{bashcode}
 \end{center}
 \caption{Создание пустого репозитория}
 \label{lst:gitinit}

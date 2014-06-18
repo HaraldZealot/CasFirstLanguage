@@ -27,6 +27,8 @@
 \usepackage{minted}
 \usemintedstyle{friendly}
 \renewcommand\listingscaption{Код}
+\newminted{bash}{frame=lines}
+\newminted{c}{frame=leftline}
 
 
 \usepackage[unicode, pdfborder={0 0 0 0}]{hyperref}
@@ -47,7 +49,7 @@ pdfsubject = {базовый модуль}}% End of hypersetup
 
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{minted}[frame=leftline]{text}
 printf("строка форматирования", произвольное, число, аргументов);
 scanf("строка форматирования", произвольное, число, аргументов);
 \end{minted}
@@ -60,11 +62,9 @@ scanf("строка форматирования", произвольное, ч�
 Рассмотрим несколько примеров печати. Для начала напечатаем просто строку текста.
 
 \begin{listing}[ht]
-\begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("simple string for sample");
-\end{minted}
-\end{center}
+\end{ccode}
 \caption{Простой вывод строки}
 \label{lst:simplestring}
 \end{listing}
@@ -73,9 +73,9 @@ printf("simple string for sample");
 
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("This is\t\tmore\ncomplicated\tstring\n");
-\end{minted}
+\end{ccode}
 \end{center}
 \caption{Более сложный пример со строкой}
 \label{lst:morecomplicatedstring}
@@ -83,11 +83,11 @@ printf("This is\t\tmore\ncomplicated\tstring\n");
 
 \begin{listing}[ht]
 \begin{center}
-\begin{verbatim}
+\begin{minted}[frame=single]{text}
 This is         more
 complicated     string
 
-\end{verbatim}
+\end{minted}
 \end{center}
 \caption{Результат предыдущего кода}
 \label{lst:resultmcs}
@@ -110,9 +110,9 @@ complicated     string
 Однако строка форматирования обладает гораздо большей функциональностью. Помимо обычных символов и escape последовательностей строка форматирования может содержать спецификации форматирования. Любая спецификация состоит из символа \verb|%|, набора флагов и различных параметров формата (они могут отсутствовать) и ключевого символа-спецификации. Так, например, \verb|%s| предназначен для вывода строки\footnote{от \textit{string} --- строка}. В коде \ref{lst:percents} показан пример использования спецификации \verb|%s|.
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("%s myla %s", "mama", "ramu");
-\end{minted}
+\end{ccode}
 \end{center}
 \caption{Простой пример спецификации}
 \label{lst:percents}
@@ -123,9 +123,9 @@ printf("%s myla %s", "mama", "ramu");
 Начнём усложнять наши примеры. Мы можем выводить не только строки, но и целые числа (см. код \ref{lst:percentd}).
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("min(%d, %d) = %d", 2, 5, 2);
-\end{minted}
+\end{ccode}
 \end{center}
 \caption{Спецификация для целых чисел}
 \label{lst:percentd}
@@ -133,18 +133,18 @@ printf("min(%d, %d) = %d", 2, 5, 2);
 В приведённом примере мы самостоятельно определили минимум, но можно поручить это компьютеру, так как в качестве аргументов могут быть выражения (код \ref{lst:printfexpression}) и переменные (код \ref{lst:printfvariable}).
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("%d + %d = %d", 2, 5, 2 + 5);
-\end{minted}
+\end{ccode}
 \end{center}
 \caption{Использование выражений}
 \label{lst:printfexpression}
 \end{listing}
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("%d - %d = %d", a, b, a - b);
-\end{minted}
+\end{ccode}
 \end{center}
 \caption{Использование переменных}
 \label{lst:printfvariable}
@@ -153,9 +153,9 @@ printf("%d - %d = %d", a, b, a - b);
 Также можно выводить дробные числа (см \ref{lst:floatspec})
 \begin{listing}[ht]
 \begin{center}
-\begin{minted}{cpp}
+\begin{ccode}
 printf("2/3 = %f", 2.0 / 3.0);
-\end{minted}
+\end{ccode}
 \end{center}
 \caption{Спецификация для дробных чисел}
 \label{lst:floatspec}
