@@ -223,7 +223,7 @@ git <push|pull> <имя удалённого репозитария> <имя в�
 git push github master
 \end{bashcode}
 \end{center}
-\caption{Синтаксис отправки и стягивания}
+\caption{Синтаксис отправки}
 \label{lst:gitpush}
 \end{listing}
 
@@ -233,7 +233,7 @@ git push github master
 git pull github master
 \end{bashcode}
 \end{center}
-\caption{Синтаксис отправки и стягивания}
+\caption{Синтаксис стягивания}
 \label{lst:gitpull}
 \end{listing}
 
@@ -257,5 +257,59 @@ git pull github master
 \begin{center}
 Удачных всем коммитов!
 \end{center}
+
+\subsection{Файл gitignore}
+
+Файл гитигнор предназначен для игнорирования файлов определённого вида от отслеживания СКВ. Он подчиняется принципам глобинг шаблонов юникса, за некоторыми нюансами. Символ '*' заменяет любой символ или набор символов, в том числе отсутствующий. То что начинается с косой черты '/' интерпретируется как непосредственная папка в репозитории, а то что заканчивается на косую черту интерпретируется  как произвольная папка. Символы взятые в квадратные скобки интерпретируются как 1 любой из этих символов. Файлы попадающие под шаблон из gitignore не отслеживаются СКВ, он должен начинаться с точки и не содержать расширения (\verb|.gitignore|).
+
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+*.zuzu
+\end{bashcode}
+\end{center}
+\caption{Игнорирование файла с расширением zuzu}
+\label{lst:ignoreext}
+\end{listing}
+
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+*zuzu*
+\end{bashcode}
+\end{center}
+\caption{Игнорирование файла содержащего zuzu в имени}
+\label{lst:ignorepatern}
+\end{listing}
+
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+/zuzu
+\end{bashcode}
+\end{center}
+\caption{Игнорирование папки zuzu в корневой директории}
+\label{lst:ignorerootfolder}
+\end{listing}
+
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+zuzu/
+\end{bashcode}
+\end{center}
+\caption{Игнорирование любой папки zuzu}
+\label{lst:ignorefolder}
+\end{listing}
+
+\begin{listing}[H]
+\begin{center}
+\begin{bashcode}
+z[aou]zu
+\end{bashcode}
+\end{center}
+\caption{Игнорирование zazu, zozu, и zuzu}
+\label{lst:ignorebracket}
+\end{listing}
 
 \end{document}
